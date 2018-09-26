@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   user = new Usuario('','','','');
   shared : SharedService;
-  message : string;
+  alerta : string;
 
   constructor(
     private usuarioService : UsuarioService,
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.message = '';
+    this.alerta = '';
     this.usuarioService.login(this.user).subscribe((userAuthentication : CurrentUser) => {
        this.shared.token = userAuthentication.token;
        this.shared.user = userAuthentication.user;
@@ -38,12 +38,12 @@ export class LoginComponent implements OnInit {
       this.shared.token = null;
       this.shared.user = null;
       this.shared.showTemplate.emit(false);
-      this.message = 'Erro';
+      this.alerta = 'Erro';
     });
   }
 
   cancelLogin(){
-    this.message = '';
+    this.alerta = '';
     this.user = new Usuario('','','','');
     window.location.href = '/login';
     window.location.reload();
